@@ -1,6 +1,11 @@
 
+user_prompt = "Enter a todo: "
+todo1 = input(user_prompt)
+todo2 = input(user_prompt)
+todo3 = input(user_prompt)
 
-if __name__ == '__main__':
-    user_text = input("Enter a todo: ")
-    print(f'You wrote {user_text}')
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+todos = [todo1, todo2, todo3, "Hello"]
+print(todos)
+
+print(type(todo1))
