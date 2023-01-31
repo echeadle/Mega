@@ -22,7 +22,16 @@ while True:
             file = open('files/todos.txt', 'r')
             file.readlines()
             file.close()
+
+            # new_todos = []
+            # for item in todos:
+            # new_item = item.strip('\n')
+            # new_todos.append(new_item)
+7
+            # new_todos = [item.strip('\n') for item in todos]
+
             for index, item in enumerate(todos):
+                item = item.strip('\n')
                 row = f"{index +1 }--{item}"
                 print(row)
         case 'edit':
