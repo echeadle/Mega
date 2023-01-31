@@ -1,5 +1,3 @@
 prepare
-fix
-write
-play
 shower
+fix it well
