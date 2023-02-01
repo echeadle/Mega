@@ -3,18 +3,18 @@ while True:
     user_action = input("Type add, show, edit, delete, or exit: ")
     user_action = user_action.strip()
 
-    if 'add' in user_action or 'new' in user_action:
+    if user_action.startswith("add"):
         todo = user_action[4:]
 
         with open('files/todos.txt', 'r') as file:
             todos = file.readlines()
 
-        todos.append(todo)
+        todos.append(todo + '\n')
 
         with open('files/todos.txt', 'w') as file:
             todos = file.writelines(todos)
 
-    elif 'show' in user_action:
+    elif user_action.startswith('show'):
 
         with open('files/todos.txt', 'r') as file:
             todos = file.readlines()
@@ -23,35 +23,43 @@ while True:
             item = item.strip('\n')
             row = f"{index +1 }-{item}"
             print(row)
-    elif 'edit' in user_action:
-        number = int(user_action[5:])
-        number -= 1
 
-        with open('files/todos.txt', 'r') as file:
-            todos = file.readlines()
+    elif user_action.startswith('edit'):
+        try:
+            number = int(user_action[5:])
+            number -= 1
 
-        new_todo = input('Enter new todo: ')
-        todos[number] = new_todo + '\n'
+            with open('files/todos.txt', 'r') as file:
+                todos = file.readlines()
 
-        with open('files/todos.txt', 'w') as file:
-            todos = file.writelines(todos)
+            new_todo = input('Enter new todo: ')
+            todos[number] = new_todo + '\n'
 
-    elif 'delete' in user_action:
-        number = int(user_action[7:])
+            with open('files/todos.txt', 'w') as file:
+                todos = file.writelines(todos)
+        except ValueError:
+            print("Your command is not valid.")
+            continue
 
-        with open('files/todos.txt', 'r') as file:
-            todos = file.readlines()
-        index = number - 1
-        todo_to_remove = todos[index].strip('\n')
-        todos.pop(index)
+    elif user_action.startswith('delete'):
+        try:
+            number = int(user_action[7:])
 
-        with open('files/todos.txt', 'w') as file:
-            todos = file.writelines(todos)
+            with open('files/todos.txt', 'r') as file:
+                todos = file.readlines()
+            index = number - 1
+            todo_to_remove = todos[index].strip('\n')
+            todos.pop(index)
 
-        message = f"Todo {todo_to_remove} was removed from the list"
-        print(message)
+            with open('files/todos.txt', 'w') as file:
+                todos = file.writelines(todos)
 
-    elif 'exit' in user_action:
+            message = f"Todo {todo_to_remove} was removed from the list"
+            print(message)
+        except IndexError:
+            print("There is no item with that number.")
+            continue
+    elif user_action.startswith('exit'):
         break
     else:
         print("Command is not valid.")
