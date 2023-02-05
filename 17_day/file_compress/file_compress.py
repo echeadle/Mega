@@ -20,7 +20,7 @@ window = sg.Window("File Compressor", layout=[
 
 while True:
     event, values = window.read()
-    print(event, values)
+    print(event, 2values)
     filepaths = values["files"].split(";")
     folder = values["folder"]
     make_archive(filepaths, folder)
