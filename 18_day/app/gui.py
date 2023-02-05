@@ -1,7 +1,13 @@
 from modules import functions
 import PySimpleGUI as sg
 import time
+import os
 
+if not os.path.exists('files/todos.txt'):
+    with open("files/todos.txt", "w") as file:
+        pass
+# Create an executable file
+# pyinstaller --onefile --windowed --clean gui.py
 sg.theme("Black")
 
 time_now = time.strftime("%b %d, %Y %H:%M:%S")
